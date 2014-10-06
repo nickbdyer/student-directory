@@ -76,8 +76,10 @@ end
 def print_footer(names)
 puts "Overall, we have #{names.length} great students"
 
-
-
+#call methods!
+print_header
+print(students)
+print_footer(students)
 
 
 
