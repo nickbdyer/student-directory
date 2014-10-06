@@ -15,7 +15,7 @@ end
 
 
 #finally, we print the total
-def print_footer(names)
+def print_footer(names) 
 	puts "Overall, we have #{names.length} great students".center(150)
 end
 
@@ -28,9 +28,19 @@ def input_students
 	name = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
-		puts "What cohort are they in?"
-		cohort = gets.chomp
-		cohort = "Unknown" if cohort.empty?
+		puts "Please select their cohort:"
+		puts "Press 1 for September"
+		puts "Press 2 for October"
+		puts "Press return for Unknown"
+		input = gets.chomp
+		case input
+		when "1"
+			cohort = "September"
+		when "2"
+			cohort = "October"
+		else
+			cohort = "Unknown"
+		end
 		students << {:name => name.capitalize, :cohort => cohort.to_sym, :hobbies => :coding, :birthplace => :earth}
 		puts "Now we have #{students.length} students"
 		# get another name from the user
