@@ -6,8 +6,10 @@ end
 
 # second we take a list of students from the user
 def print_list(students)
-	students.each_with_index do |student, index|
-			print "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)\n" if student[:name].length < 12
+	i = 0
+	while i < students.length do
+			print "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)\n"
+			i+=1
 	end
 end
 
