@@ -28,7 +28,10 @@ def input_students
 	name = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
-		students << {:name => name.capitalize, :cohort => :october, :hobbies => :coding, :birthplace => :earth}
+		puts "What cohort are they in?"
+		cohort = gets.chomp
+		cohort = "Unknown" if cohort.empty?
+		students << {:name => name.capitalize, :cohort => cohort.to_sym, :hobbies => :coding, :birthplace => :earth}
 		puts "Now we have #{students.length} students"
 		# get another name from the user
 		name = gets.chomp
