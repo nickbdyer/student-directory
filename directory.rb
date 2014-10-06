@@ -57,3 +57,6 @@ puts "Tim Scully"
 puts "Victoria Stepanovna"
 puts "Yvette Cook"
 puts "Zeeshan Rasool"
+print "Overall, we have "
+print 57
+print " great students"
