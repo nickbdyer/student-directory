@@ -8,7 +8,7 @@ end
 def print_list(students)
 	i = 0
 	while i < students.length do
-			print "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)\n"
+			print "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort), hobbies include #{students[i][:hobbies]}\n"
 			i+=1
 	end
 end
@@ -28,7 +28,7 @@ def input_students
 	name = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
-		students << {:name => name.capitalize, :cohort => :october}
+		students << {:name => name.capitalize, :cohort => :october, :hobbies => :coding, :birthplace => :earth}
 		print "Now we have #{students.length} students\n"
 		# get another name from the user
 		name = gets.chomp
