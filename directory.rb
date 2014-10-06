@@ -1,14 +1,14 @@
 #first we print the header
 def print_header
-	puts "The students of my cohort at Makers Academy"
-	puts "------------"
+	puts "The students of my cohort at Makers Academy".center(150)
+	puts "------------".center(150)
 end
 
 # second we take a list of students from the user
 def print_list(students)
 	i = 0
 	while i < students.length do
-			print "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort), hobbies include #{students[i][:hobbies]}\n"
+			puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort), hobbies include #{students[i][:hobbies]} and being born on #{students[i][:birthplace]}.".center(150)
 			i+=1
 	end
 end
@@ -16,12 +16,12 @@ end
 
 #finally, we print the total
 def print_footer(names)
-	print "Overall, we have #{names.length} great students\n"
+	puts "Overall, we have #{names.length} great students".center(150)
 end
 
 def input_students
-	print "Please enter the names of the students\n"
-	print "To finish, just hit return twice\n"
+	puts "Please enter the names of the students"
+	puts "To finish, just hit return twice"
 	#create an empty array
 	students = []
 	#get the first name
@@ -29,7 +29,7 @@ def input_students
 	# while the name is not empty, repeat this code
 	while !name.empty? do
 		students << {:name => name.capitalize, :cohort => :october, :hobbies => :coding, :birthplace => :earth}
-		print "Now we have #{students.length} students\n"
+		puts "Now we have #{students.length} students"
 		# get another name from the user
 		name = gets.chomp
 	end
