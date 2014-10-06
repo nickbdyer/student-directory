@@ -7,7 +7,7 @@ end
 # second we take a list of students from the user
 def print_list(students)
 	students.each_with_index do |student, index|
-		print "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)\n"
+			print "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)\n" if student[:name].start_with?("A")
 	end
 end
 
@@ -26,7 +26,7 @@ def input_students
 	name = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
-		students << {:name => name, :cohort => :october}
+		students << {:name => name.capitalize, :cohort => :october}
 		print "Now we have #{students.length} students\n"
 		# get another name from the user
 		name = gets.chomp
