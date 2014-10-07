@@ -23,10 +23,30 @@ def print_sorted_list
 	end
 end
 
+def student_s
+	@students.length == 1 ? "student" : "students"
+end
+
 #finally, we print the total
 def print_footer
-	last_word = @students.length == 1 ? "student" : "students"
-	puts "Overall, we have #{@students.length} great #{last_word}.".center(100)
+	puts "Overall, we have #{@students.length} great #{student_s}.".center(100)
+end
+
+
+def input_students
+	puts "Please enter the names of the students"
+	puts "To finish, just hit return twice"
+	#get the first name
+	name = STDIN.gets.chomp
+	# while the name is not empty, repeat this code
+	while !name.empty? do
+		add_student(name, add_cohort)
+			puts "Now we have #{@students.length} #{student_s}"
+		# get another name from the user
+		name = STDIN.gets.chomp
+	end
+	#return the array of students
+	@students
 end
 
 def add_cohort
@@ -45,25 +65,6 @@ def add_cohort
 	end
 	cohort
 end
-
-
-def input_students
-	puts "Please enter the names of the students"
-	puts "To finish, just hit return twice"
-	#get the first name
-	name = STDIN.gets.chomp
-	# while the name is not empty, repeat this code
-	while !name.empty? do
-		add_student(name, add_cohort)
-		last_word = @students.length == 1 ? "student" : "students"
-			puts "Now we have #{@students.length} #{last_word}"
-		# get another name from the user
-		name = STDIN.gets.chomp
-	end
-	#return the array of students
-	@students
-end
-
 
 def print_menu
 	puts "1. Input the students."
@@ -87,7 +88,7 @@ def show_students
 		end
 		print_footer
 	else
-		puts "There are no students stored in the system."
+		puts "There are no students stored."
 	end
 end
 
@@ -118,7 +119,7 @@ def try_load_students
 	return if filename.nil? # get out of the method if it isn't given
 	if File.exists?(filename) # if it exists
 		load_students(filename)
-			puts "Loaded #{@students.length} from #{filename}"
+			puts "Loaded #{@students.length} #{student_s} from #{filename}"
 	else # if it doesn't exist
 		puts "Sorry, #{filename} doesn't exist."
 		exit
