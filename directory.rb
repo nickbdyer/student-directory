@@ -55,7 +55,11 @@ def input_students
 			end
 		end
 		students << {:name => name.capitalize, :cohort => cohort.to_sym, :hobbies => :coding, :birthplace => :earth}
-		puts "Now we have #{students.length} students"
+		if students.length == 1
+			puts "Now we have #{students.length} student"
+		else
+			puts "Now we have #{students.length} students"
+		end
 		# get another name from the user
 		name = gets.chomp
 	end
