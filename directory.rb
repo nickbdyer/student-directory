@@ -1,10 +1,12 @@
+require 'Date'
+
 #first we print the header
 def print_header
 	puts "The students of my cohort at Makers Academy".center(150)
 	puts "------------".center(150)
 end
 
-# second we take a list of students from the user
+# unsorted list of students
 def print_list(students)
 	i = 0
 	while i < students.length do
@@ -13,9 +15,9 @@ def print_list(students)
 	end
 end
 
-# second we take a list of students from the user
+# list of students sorted by month
 def print_sorted_list(students)
-	sorted_students = students.sort_by {|student| student[:cohort]}
+	sorted_students = students.sort_by {|student| Date::MONTHNAMES.index("#{student[:cohort]}")}
 	sorted_students.each do |student| 
 		puts "#{student[:name]} (#{student[:cohort]} cohort), hobbies include #{student[:hobbies]} and being born on #{student[:birthplace]}.".center(150)
 	end
@@ -23,7 +25,11 @@ end
 
 #finally, we print the total
 def print_footer(names) 
+	if names.length == 1
+	puts "Overall, we have #{names.length} great student".center(150)
+	else
 	puts "Overall, we have #{names.length} great students".center(150)
+	end
 end
 
 def input_students
@@ -36,34 +42,17 @@ def input_students
 	# while the name is not empty, repeat this code
 	while !name.empty? do
 		puts "Please select their cohort month (1-12):"
-		input = gets.chomp
-		case input
-		when "1"
-			cohort = "January"
-		when "2"
-			cohort = "February"
-		when "3"
-			cohort = "March"
-		when "4"
-			cohort = "April"
-		when "5"
-			cohort = "May"
-		when "6"
-			cohort = "June"
-		when "7"
-			cohort = "July"
-		when "8"
-			cohort = "August"
-		when "9"
-			cohort = "September"
-		when "10"
-			cohort = "October"
-		when "11"
-			cohort = "November"
-		when "12"
-			cohort = "December"
-		else
-			cohort = "Unknown"
+		input = gets.chomp.to_i
+		cohort_assigned = false
+		while cohort_assigned == false
+			case input
+			when 1..12
+				cohort = Date::MONTHNAMES[input]
+				cohort_assigned = true
+			else
+				puts "Enter a number from 1 to 12."
+				input = gets.chomp.to_i
+			end
 		end
 		students << {:name => name.capitalize, :cohort => cohort.to_sym, :hobbies => :coding, :birthplace => :earth}
 		puts "Now we have #{students.length} students"
