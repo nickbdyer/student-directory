@@ -29,6 +29,24 @@ def print_footer
 	puts "Overall, we have #{@students.length} great #{last_word}.".center(100)
 end
 
+def add_cohort
+	puts "Please select their cohort month (1-12):"
+	cohort_assigned = false
+	cohort_index = gets.chomp.to_i
+	while cohort_assigned == false
+		case cohort_index
+		when 1..12
+			cohort = Date::MONTHNAMES[cohort_index]
+			cohort_assigned = true
+		else
+			puts "Enter a number from 1 to 12."
+			cohort_index = gets.chomp.to_i
+		end
+	end
+	cohort
+end
+
+
 def input_students
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
@@ -36,20 +54,7 @@ def input_students
 	name = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
-		puts "Please select their cohort month (1-12):"
-		input = gets.chomp.to_i
-		cohort_assigned = false
-		while cohort_assigned == false
-			case input
-			when 1..12
-				cohort = Date::MONTHNAMES[input]
-				cohort_assigned = true
-			else
-				puts "Enter a number from 1 to 12."
-				input = gets.chomp.to_i
-			end
-		end
-		add_student(name, cohort)
+		add_student(name, add_cohort)
 		last_word = @students.length == 1 ? "student" : "students"
 			puts "Now we have #{@students.length} #{last_word}"
 		# get another name from the user
