@@ -28,16 +28,33 @@ def input_students
 	name = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
-		puts "Please select their cohort:"
-		puts "Press 1 for September"
-		puts "Press 2 for October"
-		puts "Press return for Unknown"
+		puts "Please select their cohort month (1-12):"
 		input = gets.chomp
 		case input
 		when "1"
-			cohort = "September"
+			cohort = "January"
 		when "2"
+			cohort = "February"
+		when "3"
+			cohort = "March"
+		when "4"
+			cohort = "April"
+		when "5"
+			cohort = "May"
+		when "6"
+			cohort = "June"
+		when "7"
+			cohort = "July"
+		when "8"
+			cohort = "August"
+		when "9"
+			cohort = "September"
+		when "10"
 			cohort = "October"
+		when "11"
+			cohort = "November"
+		when "12"
+			cohort = "December"
 		else
 			cohort = "Unknown"
 		end
