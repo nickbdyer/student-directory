@@ -69,7 +69,7 @@ end
 
 #call methods!
 students = input_students
-if students.empty? == false
+if !students.empty?
 	puts "Sort by cohort?(y/n)"
 	input = gets.chomp
 	case input
