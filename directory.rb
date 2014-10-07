@@ -38,7 +38,7 @@ def input_students
 	#create an empty array
 	students = []
 	#get the first name
-	name = gets.chomp
+	name = gets.gsub(/\n/, '')
 	# while the name is not empty, repeat this code
 	while !name.empty? do
 		puts "Please select their cohort month (1-12):"
