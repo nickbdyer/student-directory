@@ -13,6 +13,13 @@ def print_list(students)
 	end
 end
 
+# second we take a list of students from the user
+def print_sorted_list(students)
+	sorted_students = students.sort_by {|student| student[:cohort]}
+	sorted_students.each do |student| 
+		puts "#{student[:name]} (#{student[:cohort]} cohort), hobbies include #{student[:hobbies]} and being born on #{student[:birthplace]}.".center(150)
+	end
+end
 
 #finally, we print the total
 def print_footer(names) 
@@ -69,9 +76,27 @@ end
 
 #call methods!
 students = input_students
-print_header
-print_list(students)
-print_footer(students)
+if students.empty? == false
+	puts "Sort by cohort?(y/n)"
+	input = gets.chomp
+	case input
+	when "y"
+		print_header
+		print_sorted_list(students)
+		print_footer(students)
+	when "n"
+		print_header
+		print_list(students)
+		print_footer(students)
+	else
+		print_header
+		print_list(students)
+		print_footer(students)
+	end
+else
+	puts "There are no students stored in the system."
+end
+
 
 
 
