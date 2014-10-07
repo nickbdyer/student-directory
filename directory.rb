@@ -32,7 +32,7 @@ end
 def add_cohort
 	puts "Please select their cohort month (1-12):"
 	cohort_assigned = false
-	cohort_index = gets.chomp.to_i
+	cohort_index = STDIN.gets.chomp.to_i
 	while cohort_assigned == false
 		case cohort_index
 		when 1..12
@@ -40,7 +40,7 @@ def add_cohort
 			cohort_assigned = true
 		else
 			puts "Enter a number from 1 to 12."
-			cohort_index = gets.chomp.to_i
+			cohort_index = STDIN.gets.chomp.to_i
 		end
 	end
 	cohort
@@ -51,14 +51,14 @@ def input_students
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
 	#get the first name
-	name = gets.chomp
+	name = STDIN.gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
 		add_student(name, add_cohort)
 		last_word = @students.length == 1 ? "student" : "students"
 			puts "Now we have #{@students.length} #{last_word}"
 		# get another name from the user
-		name = gets.chomp
+		name = STDIN.gets.chomp
 	end
 	#return the array of students
 	@students
@@ -77,7 +77,7 @@ end
 def show_students
 	if !@students.empty?
 		puts "Sort by cohort?(y/n)"
-		input = gets.chomp
+		input = STDIN.gets.chomp
 		print_header
 		case input
 		when "y"
@@ -101,17 +101,30 @@ def save_students
 		file.puts csv_line
 	end
 	file.close
-	puts "File saved."
+	puts "File saved." 
 end
 
-def load_students
-	file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+	file = File.open(filename, "r")
 	file.readlines.each do |line|
 		name, cohort = line.chomp.split(',')
 		add_student(name, cohort)
 	end
 	file.close
 end
+
+def try_load_students
+	filename = ARGV.first # first argument from the command line
+	return if filename.nil? # get out of the method if it isn't given
+	if File.exists?(filename) # if it exists
+		load_students(filename)
+			puts "Loaded #{@students.length} from #{filename}"
+	else # if it doesn't exist
+		puts "Sorry, #{filename} doesn't exist."
+		exit
+	end
+end
+
 
 def add_student(name, cohort)
 	@students << {:name => name.capitalize, :cohort => cohort.to_sym}
@@ -136,9 +149,10 @@ end
 
 
 def interactive_menu
+	try_load_students
 	loop do
 		print_menu
-		process(gets.chomp)
+		process(STDIN.gets.chomp)
 	end
 end
 
