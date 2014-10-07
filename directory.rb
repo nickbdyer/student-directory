@@ -32,13 +32,11 @@ def print_footer(names)
 	end
 end
 
-def input_students
+def input_students(students)
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
-	#create an empty array
-	students = []
 	#get the first name
-	name = gets.gsub(/\n/, '')
+	name = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do
 		puts "Please select their cohort month (1-12):"
@@ -67,28 +65,49 @@ def input_students
 	students
 end
 
-#call methods!
-students = input_students
-if !students.empty?
-	puts "Sort by cohort?(y/n)"
-	input = gets.chomp
-	case input
-	when "y"
-		print_header
-		print_sorted_list(students)
-		print_footer(students)
-	when "n"
-		print_header
-		print_list(students)
-		print_footer(students)
-	else
-		print_header
-		print_list(students)
-		print_footer(students)
+def interactive_menu
+	students = []
+	loop do
+		#1. Print Menu, and ask user what they want to do. 
+		puts "1. Input the students."
+		puts "2. Show the student list."
+		puts "9. Exit"
+		#2. Ask the user for input. 
+		selection = gets.chomp
+		#3. Do what the user asked. 
+		case selection
+		when "1"
+			students = input_students(students)
+		when "2"
+			if !students.empty?
+				puts "Sort by cohort?(y/n)"
+				input = gets.chomp
+				case input
+				when "y"
+					print_header
+					print_sorted_list(students)
+					print_footer(students)
+				when "n"
+					print_header
+					print_list(students)
+					print_footer(students)
+				else
+					print_header
+					print_list(students)
+					print_footer(students)
+				end
+			else
+				puts "There are no students stored in the system."
+			end
+		when "9"
+			Exit
+		else
+			puts "I dont' know what you meant, try again."
+		end
 	end
-else
-	puts "There are no students stored in the system."
 end
+
+interactive_menu
 
 
 
