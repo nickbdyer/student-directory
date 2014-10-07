@@ -11,7 +11,7 @@ end
 # unsorted list of students
 def print_student_list
 	@students.each_with_index do |student, index|
-		puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort), hobbies include #{student[:hobbies]} and being born on #{student[:birthplace]}.".center(100)
+		puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort).".center(100)
 	end
 end
 
@@ -19,7 +19,7 @@ end
 def print_sorted_list
 	sorted_students = @students.sort_by {|student| Date::MONTHNAMES.index("#{student[:cohort]}")}
 	sorted_students.each do |student| 
-		puts "#{student[:name]} (#{student[:cohort]} cohort), hobbies include #{student[:hobbies]} and being born on #{student[:birthplace]}.".center(100)
+		puts "#{student[:name]} (#{student[:cohort]} cohort).".center(100)
 	end
 end
 
@@ -49,7 +49,7 @@ def input_students
 				input = gets.chomp.to_i
 			end
 		end
-		@students << {:name => name.capitalize, :cohort => cohort.to_sym, :hobbies => :coding, :birthplace => :earth}
+		add_student(name, cohort)
 		last_word = @students.length == 1 ? "student" : "students"
 			puts "Now we have #{@students.length} #{last_word}"
 		# get another name from the user
@@ -77,8 +77,6 @@ def show_students
 		case input
 		when "y"
 			print_sorted_list
-		when "n"
-			print_student_list
 		else
 			print_student_list
 		end
@@ -105,11 +103,14 @@ def load_students
 	file = File.open("students.csv", "r")
 	file.readlines.each do |line|
 		name, cohort = line.chomp.split(',')
-		@students << {:name => name, :cohort => cohort.to_sym}
+		add_student(name, cohort)
 	end
 	file.close
 end
 
+def add_student(name, cohort)
+	@students << {:name => name.capitalize, :cohort => cohort.to_sym}
+end
 
 def process(selection)
 	case selection
