@@ -1,4 +1,5 @@
 require 'Date'
+require 'CSV'
 
 @students = []
 
@@ -92,14 +93,26 @@ def show_students
 	end
 end
 
+# def save_students
+# 	# open the file for writing
+# 	File.open("students.csv", "w") do |file|
+# 	# iterate over the array of students
+# 		@students.each do |student|
+# 			student_data = [student[:name], student[:cohort]]
+# 			csv_line = student_data.join(",")
+# 			file.puts csv_line
+# 		end
+# 	end
+# 	puts "File saved." 
+# end
+
 def save_students
 	# open the file for writing
-	File.open("students.csv", "w") do |file|
+	CSV.open("students.csv", "w") do |file|
 	# iterate over the array of students
 		@students.each do |student|
 			student_data = [student[:name], student[:cohort]]
-			csv_line = student_data.join(",")
-			file.puts csv_line
+			file << student_data
 		end
 	end
 	puts "File saved." 
