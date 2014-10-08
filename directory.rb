@@ -119,11 +119,8 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
-	File.open(filename, "r") do |file|
-		file.readlines.each do |line|
-			name, cohort = line.chomp.split(',')
-			add_student(name, cohort)
-		end
+	CSV.foreach(filename, "r") do |row|
+			add_student(row[0], row[1])
 	end
 end
 
