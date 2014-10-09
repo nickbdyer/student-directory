@@ -106,9 +106,16 @@ end
 # 	puts "File saved." 
 # end
 
-def save_students
+def choose_file
+	puts "Please enter the name of the file you want to use, press return to use default:"
+	filename = STDIN.gets.chomp + ".csv"
+	filename == ".csv" ? filename = "students.csv" : filename
+end
+
+
+def save_students(filename)
 	# open the file for writing
-	CSV.open("students.csv", "w") do |file|
+	CSV.open(filename, "w") do |file|
 	# iterate over the array of students
 		@students.each do |student|
 			student_data = [student[:name], student[:cohort]]
@@ -118,7 +125,7 @@ def save_students
 	puts "File saved." 
 end
 
-def load_students(filename = "students.csv")
+def load_students(filename)
 	CSV.foreach(filename, "r") do |row|
 			add_student(row[0], row[1])
 	end
@@ -148,9 +155,9 @@ def process(selection)
 		when "2"
 			show_students
 		when "3"
-			save_students
+			save_students(choose_file)
 		when "4"
-			load_students
+			load_students(choose_file)
 		when "9"
 			exit
 		else
