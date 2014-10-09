@@ -34,17 +34,28 @@ def print_footer
 end
 
 
+# def input_students
+# 	puts "Please enter the names of the students"
+# 	puts "To finish, just hit return twice"
+# 	#get the first name
+# 	name = STDIN.gets.chomp
+# 	# while the name is not empty, repeat this code
+# 	while !name.empty? do
+# 		add_student(name, add_cohort)
+# 		puts "Now we have #{@students.length} student#{plural}"
+# 		# get another name from the user
+# 		name = STDIN.gets.chomp
+# 	end
+# 	#return the array of students
+# 	@students
+# end
+
 def input_students
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
-	#get the first name
-	name = STDIN.gets.chomp
-	# while the name is not empty, repeat this code
-	while !name.empty? do
+	until (name = STDIN.gets.chomp).empty?
 		add_student(name, add_cohort)
-			puts "Now we have #{@students.length} student#{plural}"
-		# get another name from the user
-		name = STDIN.gets.chomp
+		puts "Now we have #{@students.length} student#{plural}"
 	end
 	#return the array of students
 	@students
