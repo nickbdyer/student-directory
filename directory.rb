@@ -5,7 +5,7 @@ require 'CSV'
 
 #first we print the header
 def print_header
-	puts "The students of my cohort at Makers Academy".center(100)
+	puts "The student#{plural} of my cohort at Makers Academy".center(100)
 	puts "------------".center(100)
 end
 
@@ -24,13 +24,13 @@ def print_sorted_list
 	end
 end
 
-def student_s
-	@students.length == 1 ? "student" : "students"
+def plural
+	@students.length == 1 ? "" : "s"
 end
 
 #finally, we print the total
 def print_footer
-	puts "Overall, we have #{@students.length} great #{student_s}.".center(100)
+	puts "Overall, we have #{@students.length} great student#{plural}.".center(100)
 end
 
 
@@ -42,7 +42,7 @@ def input_students
 	# while the name is not empty, repeat this code
 	while !name.empty? do
 		add_student(name, add_cohort)
-			puts "Now we have #{@students.length} #{student_s}"
+			puts "Now we have #{@students.length} student#{plural}"
 		# get another name from the user
 		name = STDIN.gets.chomp
 	end
@@ -50,22 +50,31 @@ def input_students
 	@students
 end
 
+# def add_cohort
+# 	puts "Please select their cohort month (1-12):"
+# 	cohort_assigned = false
+# 	cohort_index = STDIN.gets.chomp.to_i
+# 	while cohort_assigned == false
+# 		case cohort_index
+# 		when 1..12
+# 			cohort = Date::MONTHNAMES[cohort_index]
+# 			cohort_assigned = true
+# 		else
+# 			puts "Enter a number from 1 to 12."
+# 			cohort_index = STDIN.gets.chomp.to_i
+# 		end
+# 	end
+# 	cohort
+# end
+
 def add_cohort
 	puts "Please select their cohort month (1-12):"
-	cohort_assigned = false
-	cohort_index = STDIN.gets.chomp.to_i
-	while cohort_assigned == false
-		case cohort_index
-		when 1..12
-			cohort = Date::MONTHNAMES[cohort_index]
-			cohort_assigned = true
-		else
-			puts "Enter a number from 1 to 12."
-			cohort_index = STDIN.gets.chomp.to_i
-		end
+	until (1..12) === (cohort_index = STDIN.gets.chomp.to_i)
+		puts "Enter a number from 1 to 12."
 	end
-	cohort
+	cohort = Date::MONTHNAMES[cohort_index]
 end
+
 
 def print_menu
 	puts "1. Input the students."
@@ -136,7 +145,7 @@ def try_load_students
 	return if filename.nil? # get out of the method if it isn't given
 	if File.exists?(filename) # if it exists
 		load_students(filename)
-			puts "Loaded #{@students.length} #{student_s} from #{filename}"
+			puts "Loaded #{@students.length} student#{plural} from #{filename}"
 	else # if it doesn't exist
 		puts "Sorry, #{filename} doesn't exist."
 		exit
