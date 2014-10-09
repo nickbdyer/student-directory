@@ -34,22 +34,6 @@ def print_footer
 end
 
 
-# def input_students
-# 	puts "Please enter the names of the students"
-# 	puts "To finish, just hit return twice"
-# 	#get the first name
-# 	name = STDIN.gets.chomp
-# 	# while the name is not empty, repeat this code
-# 	while !name.empty? do
-# 		add_student(name, add_cohort)
-# 		puts "Now we have #{@students.length} student#{plural}"
-# 		# get another name from the user
-# 		name = STDIN.gets.chomp
-# 	end
-# 	#return the array of students
-# 	@students
-# end
-
 def input_students
 	puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
@@ -61,22 +45,6 @@ def input_students
 	@students
 end
 
-# def add_cohort
-# 	puts "Please select their cohort month (1-12):"
-# 	cohort_assigned = false
-# 	cohort_index = STDIN.gets.chomp.to_i
-# 	while cohort_assigned == false
-# 		case cohort_index
-# 		when 1..12
-# 			cohort = Date::MONTHNAMES[cohort_index]
-# 			cohort_assigned = true
-# 		else
-# 			puts "Enter a number from 1 to 12."
-# 			cohort_index = STDIN.gets.chomp.to_i
-# 		end
-# 	end
-# 	cohort
-# end
 
 def add_cohort
 	puts "Please select their cohort month (1-12):"
@@ -101,30 +69,12 @@ def show_students
 		puts "Sort by cohort?(y/n)"
 		input = STDIN.gets.chomp
 		print_header
-		case input
-		when "y"
-			print_sorted_list
-		else
-			print_student_list
-		end
+		input = "y" ? print_sorted_list : print_student_list
 		print_footer
 	else
 		puts "There are no students stored."
 	end
 end
-
-# def save_students
-# 	# open the file for writing
-# 	File.open("students.csv", "w") do |file|
-# 	# iterate over the array of students
-# 		@students.each do |student|
-# 			student_data = [student[:name], student[:cohort]]
-# 			csv_line = student_data.join(",")
-# 			file.puts csv_line
-# 		end
-# 	end
-# 	puts "File saved." 
-# end
 
 def choose_file
 	puts "Please enter the name of the file you want to use, press return to use default:"
